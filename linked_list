@@ -1,0 +1,258 @@
+
+
+#include <stdio.h>
+#include <conio.h>
+#include <malloc.h>
+
+/* structure containing a data part and link part */
+struct node
+{
+	int data ;
+	struct node * link ;
+} ;
+
+void append ( int ) ;
+void middle();
+int count();
+
+void display ( int index ) ;
+void del (  ) ;
+struct node *p ;
+int count ()
+{
+	int c = 0;
+    struct node *temp;
+    temp=p;
+	/* traverse the entire linked list */
+	while ( temp != NULL )
+	{
+        temp= temp-> link ;
+		c++ ;
+	}
+
+	return c ;
+}
+void middle()
+{
+    int c=0;
+    int mid;
+    int a ;
+    a= count();
+    mid=a/2;
+
+	printf ( "\n" ) ;
+    struct node * temp;
+    temp=p;
+
+	while ( temp!=NULL)
+	{
+	    if(mid==c)
+        {
+            printf ( "%d ", temp->data);
+        }
+
+		temp= temp->link ;
+		c++;
+	}
+}
+void end_node(int n)
+{
+    int len=count();
+    int a=len-n+1;
+    int count=1;
+
+	printf ( "\n" ) ;
+    struct node * temp;
+    temp=p;
+	/* traverse the entire linked list */
+	while ( temp!=NULL)
+	{
+	    if(a==count)
+        {
+            printf ( "%d ", temp->data);
+        }
+
+		temp= temp->link ;
+		count++;
+	}
+
+}
+void search(int num)
+{
+    int count=0;
+      struct node * temp;
+    temp=p;
+	/* traverse the entire linked list */
+	while ( temp!=NULL)
+	{
+	    if(num==temp->data)
+
+        {
+            count++;
+
+
+        }
+
+		temp= temp->link ;
+
+	}
+	printf("num of times : %d",count);
+}
+void delete_anode ( int pos )
+{
+	struct node *old, *temp ;
+
+	temp = p ;
+	int count=1;
+
+	while ( temp != NULL )
+	{
+
+		if ( pos==count )
+		{
+			/* if node to be deleted is the first node in the linked list */
+			if ( temp == p )
+            {
+
+
+				p = temp -> link ;
+
+            }
+			/* deletes the intermediate nodes in the linked list */
+			else
+            {
+
+			old -> link = temp -> link ;
+            }
+
+			free ( temp ) ;
+
+			break;
+
+		}
+
+		old=temp;
+			temp = temp -> link ;
+			count++;  /* go to the next node */
+
+
+	}
+
+
+}
+void display1()
+{
+     struct node *temp;
+    temp=p;
+	/* traverse the entire linked list */
+	while ( temp!=NULL)
+	{
+
+            printf ( "%d ", temp->data);
+
+
+		temp= temp->link ;
+		}
+}
+void main( )
+{
+
+	p = NULL ;  /* empty linked list */
+
+    append (  14 ) ;
+	append (  100 ) ;
+	append (  25 ) ;
+	append (  42 ) ;
+	append (  17 ) ;
+   append(100);
+   append(14);
+   printf("assign 1\n");
+	display ( 2) ;
+   printf("assign 3 \n");
+	middle();
+   printf("assign 6\n");
+
+search(100);
+printf("assign 4\n");
+end_node(4);
+printf("assign 2 \n");
+delete_anode(2);
+display1();
+printf("assign 5\n");
+printf("after delete");
+    del();
+    display1 ( ) ;
+}
+
+/* adds a node at the end of a linked list */
+void append (  int num )
+{
+	struct node *temp, *r ;
+
+	if (p == NULL ) /* if the list is empty, create first node */
+	{
+		temp = malloc ( sizeof ( struct node ) ) ;
+		temp -> data = num ;
+		temp -> link = NULL ;
+		p=temp ;
+	}
+	else
+	{
+		temp = p;
+
+		/* go to last node */
+		while ( temp -> link != NULL )
+			temp = temp -> link ;
+
+		/* add node at the end */
+		r = malloc ( sizeof ( struct node ) ) ;
+		r -> data = num ;
+		r -> link = NULL ;
+		temp -> link = r ;
+	}
+}
+
+/* displays the contents of the linked list */
+void display (int index )
+
+ {
+    int count=1;
+
+	printf ( "\n" ) ;
+    struct node * temp;
+    temp=p;
+	/* traverse the entire linked list */
+	while ( temp!=NULL)
+	{
+	    if(index==count)
+        {
+            printf ( "%d ", temp->data);
+        }
+
+		temp= temp->link ;
+		count++;
+	}
+}
+
+
+
+/* deletes the linked list whole */
+void del ( )
+{
+	struct node *temp ;
+
+
+
+	while ( p != NULL )
+	{
+
+		temp=p->link;
+		free(p);
+		p=temp;
+	}
+
+
+
+
+
+}
