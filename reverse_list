@@ -1,0 +1,86 @@
+// reverse a linked list
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct n     //containing data part n link
+{
+    int data;
+    struct n *link;
+};
+struct n *p;
+void create (int num) // creating linked list
+{
+    struct n *temp , *r;
+    if(p==NULL)
+    {
+        temp=malloc(sizeof(struct n));
+        temp->data=num;
+        temp->link=NULL;
+        p=temp;
+    }
+    else
+    {
+        temp=p;
+        while(temp->link!=NULL)
+            temp=temp->link;
+        r=malloc(sizeof(struct n));
+        r->data=num;
+        r->link=NULL;
+        temp->link=r;
+
+    }
+}
+void display() // displaying list
+{
+    struct n *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->link;
+
+    }
+}
+int count() // counting the number of nodes
+{
+    int ctr=0;
+    struct n *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        temp=temp->link;
+        ctr++;
+    }
+    return ctr;
+}
+void reverse() // reverse a linked list
+{
+  struct n *temp, *r,*s;
+  temp=p;
+  r=NULL;
+  while(temp !=NULL)
+  {
+      s=r;
+      r=temp;
+      temp=temp->link;
+      r->link=s;
+  }
+  p=r;
+}
+void main()
+{
+    p=NULL; // empty list
+    create(3);
+    create(4);
+    create(5);
+    create(6);
+    create(7);
+    display();
+    reverse();
+    printf("\nafter reverse");
+    display();
+    printf("\n");
+    printf("\n %d",count());
+
+}
