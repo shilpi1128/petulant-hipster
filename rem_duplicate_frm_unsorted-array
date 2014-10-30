@@ -1,0 +1,90 @@
+//.Remove duplicates from an unsorted linked list
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct node
+{
+    int data;
+    struct node *link;
+
+};
+struct node *p;
+
+void create(int num)
+{
+    struct node *temp,*r;
+    if(p==NULL)
+    {
+        temp=malloc(sizeof(struct node));
+        temp->data=num;
+        temp->link=NULL;
+        p=temp;
+    }
+    else
+    {
+        temp=p;
+        while(temp->link!=NULL)
+        {
+           temp=temp->link;
+        }
+        r=malloc(sizeof(struct node));
+        r->data=num;
+        r->link=NULL;
+        temp->link=r;
+    }
+}
+void display()
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->link;
+    }
+}
+
+void rem_duplicate()
+{
+    struct node *temp1,*temp2,*r;
+    temp1=p;
+
+    while(temp1!=NULL&&temp1->link!=NULL)
+
+    {
+        temp2=temp1;
+        while(temp2->link!=NULL)
+        {
+            if(temp1->data==temp2->link->data)
+            {
+                r=temp2->link;
+                temp2->link=temp2->link->link;
+                free(r);
+            }
+            else
+            {
+                temp2=temp2->link;
+            }
+        }
+        temp1=temp1->link;
+
+    }
+}
+
+void main()
+{
+    p=NULL;
+    create(2);
+    create(1);
+    create(2);
+    create(3);
+    create(3);
+    create(9);
+    create(5);
+    create(9);
+    display();
+    rem_duplicate();
+    printf("\n");
+    display();
+}
