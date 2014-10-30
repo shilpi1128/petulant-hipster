@@ -1,0 +1,102 @@
+//  Given a linked list which is sorted, how will you insert in sorted way
+
+#include<stdio.h>
+#include<malloc.h>
+
+
+struct node
+{
+    int data;
+    struct node *link;
+};
+struct node *p;
+
+void create_sortedarray(int num)    //creating sorted linked list
+{
+
+    struct node *temp ,*r;
+    if(p==NULL)      //list is empty
+    {
+     temp= malloc(sizeof(struct node));
+     temp->data=num;
+     temp->link=NULL;
+     p=temp;
+    }
+    else
+    {
+        temp=p; // list not empty
+        while(temp->link!=NULL)
+            temp=temp->link;
+        r=malloc(sizeof(struct node));
+        r->data=num;
+        r->link=NULL;
+        temp->link=r;
+
+
+    }
+
+}
+void insert_node(int n)
+{
+    struct node *new_node,*temp,*r;
+    new_node=malloc(sizeof(struct node));
+    new_node->data=n;
+
+
+    if(p==NULL||p->data >= new_node->data )
+    {
+     //   r=new_node;
+        new_node->link=p;
+        p=new_node;
+    }
+    else
+    {
+        r=p;
+        temp=p->link;
+
+
+
+        while(temp!=NULL)
+
+{       if(temp->data >= new_node->data)
+       {
+
+       new_node->link=temp;
+
+        r->link=new_node;
+        break;
+       }
+       r=r->link;
+        temp=temp->link;
+}
+    }
+
+
+}
+void display()
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->link;
+    }
+}
+void main()
+{
+    p=NULL;
+    insert_node(1);
+    create_sortedarray(2);
+    create_sortedarray(3);
+    create_sortedarray(4);
+insert_node(3);
+    create_sortedarray(8);
+
+   insert_node(5);
+   insert_node(0);
+   insert_node(7);
+   insert_node(1);
+   insert_node(0);
+    display();
+}
