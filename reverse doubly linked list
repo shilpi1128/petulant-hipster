@@ -1,0 +1,106 @@
+//reverse a doubly linked list
+
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+ struct node *p;
+
+ void create(int num)
+ {
+     struct node *temp, *r;
+     if(p==NULL)
+     {
+         temp = malloc(sizeof(struct node));
+         temp->data=num;
+         temp->prev=NULL;
+         temp->next=NULL;
+         p=temp;
+
+     }
+     else
+     {
+
+        temp=p;
+        while(temp->next!=NULL)
+            temp=temp->next;
+        r=malloc(sizeof(struct node));
+        r->data=num;
+        r->next=NULL;
+        r->prev=temp;
+
+        temp->next=r;
+
+     }
+ }
+
+void display()
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+
+}
+int count()
+{
+    struct node *temp;
+    int ctr=0;
+    temp=p;
+    while(temp!=NULL)
+  {
+
+        ctr++;
+        temp=temp->next;
+  }
+  printf("%d",ctr);
+  return ctr;
+}
+void reverse()
+{
+    struct node *temp,*r,*s,*t;
+    temp=p;
+    t=p;
+    r=p;
+    int i,j=0,n;
+    i=count();
+    while(temp->next!=NULL)
+        temp=temp->next;
+        s=temp;
+    while(j<i/2)
+    {
+        n=r->data;
+        r->data=s->data;
+        s->data=n;
+        r=r->next;
+        s=s->prev;
+        j++;
+    }
+    p=t;
+
+}
+
+void main()
+{
+    p=NULL;
+    create(1);
+    create(2);
+    create(3);
+    create(4);
+    create(5);
+    display();
+    count();
+    reverse();
+    printf(" \n");
+    display();
+
+}
