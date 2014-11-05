@@ -1,0 +1,79 @@
+// move last element to first element
+
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct node
+{
+    int data ;
+    struct node *link;
+};
+struct node *p;
+
+void create(int num)
+{
+    struct node *temp,*r;
+    if(p==NULL)
+    {
+        temp=malloc(sizeof(struct node));
+        temp->data=num;
+        temp->link=NULL;
+        p=temp;
+    }
+    else
+    {
+        temp=p;
+        while(temp->link!=NULL)
+            temp=temp->link;
+        r=malloc(sizeof(struct node));
+        r->data=num;
+        r->link=NULL;
+        temp->link=r;
+
+    }
+}
+void display()
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->link;
+    }
+}
+void last_to_first()
+{
+    struct node *temp,*r ,*s;
+    temp=p;
+    s=NULL;
+
+    while (temp->link!=NULL)
+    {
+        s=temp;
+
+        temp=temp->link;
+    }
+
+        s->link=NULL;
+
+        temp->link=p;
+        p=temp;
+
+
+ }
+
+void main()
+{
+    p=NULL;
+    create(1);
+    create(2);
+    create(3);
+    create(4);
+    create(5);
+    display();
+    printf("\n");
+    last_to_first();
+    display();
+}
