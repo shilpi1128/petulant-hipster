@@ -1,0 +1,116 @@
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct node
+{
+    int data;
+    struct node *link;
+};
+ struct node *p;
+ void create(int num) // creating linked list
+ {
+     struct node *temp , *r;
+     if (p==NULL)
+     {
+         temp=malloc(sizeof(struct node));
+         temp->data=num;
+         temp->link=NULL;
+         p=temp;
+     }
+     else
+     {
+         temp=p;
+         while(temp->link!=NULL)
+            temp=temp->link;
+         r=malloc(sizeof(struct node));
+         r->data=num;
+         r->link=NULL;
+         temp->link=r;
+     }
+ }
+ void display() // displaying list
+ {
+     struct node * temp;
+     temp=p;
+     while(temp!=NULL)
+     {
+         printf("\n%d",temp->data);
+         temp=temp->link;
+     }
+ }
+ void palindrome()
+ {
+     struct node *temp,*r,*s,*rev,*q,*l, *temp1;
+    temp=p;
+    temp1=l;
+
+     while(temp!=NULL)
+     {
+         temp=malloc(sizeof(struct node));
+
+     }
+     int flag=0;
+     temp=p;
+     r=NULL;
+     rev=NULL;
+     q=NULL;
+     while(temp!=NULL) //reverse a string
+     {
+         s=r;
+         r=temp;
+         temp=temp->link;
+         r->link=s;
+     }
+       p=r;
+  /*   rev=r;
+     printf("/n");
+     while(rev!=NULL)
+     {
+         printf("\n%d",rev->data);
+         rev=rev->link;
+     }
+display();
+     q=p;
+     rev=r;
+     if(q->data==rev->data)
+{
+printf("dfgh");
+
+        while( q!=NULL)
+        {
+            if(q->data!=rev->data)
+            {
+
+
+                flag=1;
+                break;
+            }
+           q=q->link;
+           rev=rev->link;
+           printf("ss");
+        }
+  }
+  else
+  {
+
+
+    flag=1;
+  }
+     if(flag==0)
+        printf("yes it is a palindrome");
+     else
+        printf("it is not a palindrome");
+ }*/ }
+ void main()
+ {
+     p=NULL; //empty list
+     create(1);
+     create(3);
+     create(3);
+     create(2);
+     create(1);
+     display();
+     palindrome();
+     display();
+ }
