@@ -1,0 +1,100 @@
+//delete a node from doubly linked list
+
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+ struct node *p;
+
+ void create(int num)
+ {
+     struct node *temp, *r;
+     if(p==NULL)
+     {
+         temp = malloc(sizeof(struct node));
+         temp->data=num;
+         temp->prev=NULL;
+         temp->next=NULL;
+         p=temp;
+
+     }
+     else
+     {
+
+        temp=p;
+        while(temp->next!=NULL)
+            temp=temp->next;
+        r=malloc(sizeof(struct node));
+        r->data=num;
+        r->next=NULL;
+        r->prev=temp;
+
+        temp->next=r;
+
+     }
+ }
+
+void display()
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->next;
+    }
+
+}
+void del(int num)
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        if(temp->data==num)
+        {
+            if(temp==p) // first node
+            {
+               p->prev=NULL;
+               p= p->next;
+            }
+            else
+            {
+                if(temp->next==NULL)
+                    temp->prev->next=NULL;
+                else
+                {
+                    temp->prev->next=temp->next;
+                    temp->next->prev=temp->prev;
+                }
+                free(temp);
+            }
+            return;
+        }
+         temp=temp->next;
+    }
+    printf("%d not found",num);
+}
+void main()
+{
+    p=NULL;
+    create(1);
+    create(2);
+    create(3);
+    create(4);
+    create(5);
+    display();
+    printf("\n");
+    del(4);
+    printf("after deletion \n");
+    display();
+
+
+
+}
