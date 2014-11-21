@@ -1,0 +1,78 @@
+//delete altenative node in linked list
+
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+
+struct node
+{
+    int data ;
+    struct node *link;
+};
+
+struct node *p;
+
+void create(int num)
+{
+    struct node *temp ,*r;
+
+
+    if(p==NULL)
+    {
+        temp= malloc(sizeof(struct node));
+        temp->data=num;
+        temp->link=NULL;
+        p=temp;
+    }
+    else
+    {
+        temp=p;
+        while(temp->link!=NULL)
+            temp=temp->link;
+        r= malloc(sizeof(struct node));
+        r->data=num;
+        r->link=NULL;
+        temp->link=r;
+    }
+}
+
+void display()
+{
+    struct node *temp;
+    temp=p;
+    while(temp!=NULL)
+    {
+        printf("%d",temp->data);
+        temp=temp->link;
+    }
+}
+
+void del_alt()
+{
+    struct node *prev ,*next;
+    prev=p;
+    next=p->link;
+    while(prev!=NULL && next!=NULL)
+    {
+     prev->link=next->link;
+     free(next);
+     prev=prev->link;
+     if(prev!=NULL)
+        next=prev->link;
+    }
+
+}
+
+void main()
+{
+    p=NULL;
+    create(1);
+    create(2);
+    create(3);
+    create(4);
+    create(5);
+    display();
+    printf("\n displaying after deletion .... \n");
+    del_alt();
+    display();
+}
